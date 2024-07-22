@@ -133,8 +133,9 @@ const CreateListings = () => {
     setLoading(true);
     setError(false);
     try {
+      const apiURL = import.meta.env.VITE_API_URL;
       const res = await axios.post(
-        "/api/listings/createListing",
+        `${apiURL}/api/listings/createListing`,
         listingFormData
       );
       const data = res.data;

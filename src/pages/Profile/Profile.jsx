@@ -89,8 +89,9 @@ const Profile = () => {
     dispatch(updateUserStart());
     try {
       const userId = currentUser?.user?._id;
+      const apiURL = import.meta.env.VITE_API_URL;
       const res = await axios.post(
-        `/api/user/updateUserInfo/${userId}`,
+        `${apiURL}/api/user/updateUserInfo/${userId}`,
         profileFormData
       );
 
@@ -106,7 +107,8 @@ const Profile = () => {
     e.preventDefault();
     try {
       const userID = currentUser.user._id;
-      const res = await axios.delete(`/api/user/deleteUser/${userID}`);
+      const apiURL = import.meta.env.VITE_API_URL;
+      const res = await axios.delete(`${apiURL}/api/user/deleteUser/${userID}`);
       const data = res.data;
       navigate("/sign_in");
       dispatch(updateUserSuccess(data));
@@ -121,7 +123,8 @@ const Profile = () => {
     e.preventDefault();
 
     try {
-      const res = await axios("/api/auth/sign-out");
+      const apiURL = import.meta.env.VITE_API_URL;
+      const res = await axios(`${apiURL}/api/auth/sign-out`);
       const data = res.data;
       localStorage.clear();
       navigate("/sign_in");
@@ -139,7 +142,8 @@ const Profile = () => {
     setListingLoading(true);
     try {
       const userId = currentUser.user._id;
-      const res = await axios.get(`/api/listings/${userId}`);
+      const apiURL = import.meta.env.VITE_API_URL;
+      const res = await axios.get(`${apiURL}/api/listings/${userId}`);
       setShowListings(!showListing);
       setListingData(res.data.listingdata);
       setListingLoading(false);
@@ -151,8 +155,9 @@ const Profile = () => {
 
   const deleteListing = async (listingId) => {
     try {
+      const apiURL = import.meta.env.VITE_API_URL;
       const res = await axios.delete(
-        `/api/listings/deleteListing/${listingId}`
+        `${apiURL}/api/listings/deleteListing/${listingId}`
       );
       const data = res.data;
 

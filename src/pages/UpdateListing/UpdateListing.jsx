@@ -136,8 +136,9 @@ const UpdateListing = () => {
     setLoading(true);
     setError(false);
     try {
+      const apiURL = import.meta.env.VITE_API_URL;
       const res = await axios.patch(
-        `/api/listings/updateListing/${id}`,
+        `${apiURL}/api/listings/updateListing/${id}`,
         listingFormData
       );
       const data = res.data;
@@ -153,7 +154,8 @@ const UpdateListing = () => {
   useEffect(() => {
     const fetch = async () => {
       try {
-        const res = await axios.get(`/api/listings/getListing/${id}`);
+        const apiURL = import.meta.env.VITE_API_URL;
+        const res = await axios.get(`${apiURL}/api/listings/getListing/${id}`);
         const data = res.data;
         setListingFormData(data);
       } catch (error) {

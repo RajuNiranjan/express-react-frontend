@@ -29,7 +29,8 @@ const SignUp = () => {
 
     dispatch(authStart());
     try {
-      const res = await axios.post("/api/auth/sign-up", signUpDetails);
+      const apiURL = import.meta.env.VITE_API_URL;
+      const res = await axios.post(`${apiURL}/api/auth/sign-up`, signUpDetails);
       if (
         !signUpDetails.userName ||
         signUpDetails.email ||
@@ -63,7 +64,8 @@ const SignUp = () => {
         <h1 className="font-bold text-3xl text-gray-500">Sign Up</h1>
         <form
           onSubmit={handleSubmitSignUp}
-          className="flex flex-col gap-4 my-10 w-full">
+          className="flex flex-col gap-4 my-10 w-full"
+        >
           <input
             name="userName"
             value={signUpDetails.userName}
@@ -90,7 +92,8 @@ const SignUp = () => {
           />
           <button
             type="submit"
-            className="bg-gray-500 hover:bg-gray-600 text-white font-medium text-lg cursor-pointer rounded-md p-2 transition-all duration-500">
+            className="bg-gray-500 hover:bg-gray-600 text-white font-medium text-lg cursor-pointer rounded-md p-2 transition-all duration-500"
+          >
             {loading ? "Loading..." : "Sign Up"}
           </button>
           <OAuth />

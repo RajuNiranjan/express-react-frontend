@@ -28,7 +28,11 @@ const SignIn = () => {
 
     dispatch(authStart());
     try {
-      const res = await axios.post("/api/auth/sign-in", signInFormData);
+      const apiURL = import.meta.env.VITE_API_URL;
+      const res = await axios.post(
+        `${apiURL}/api/auth/sign-in`,
+        signInFormData
+      );
 
       if (!signInFormData.email || !signInFormData.password) {
         return dispatch(authFailure(res.message));
@@ -59,7 +63,8 @@ const SignIn = () => {
         <h1 className="font-bold text-3xl text-gray-500">Sign In</h1>
         <form
           onSubmit={handleSubmitSignIn}
-          className="flex flex-col gap-4 my-10 w-full">
+          className="flex flex-col gap-4 my-10 w-full"
+        >
           <input
             name="email"
             value={signInFormData.email}
@@ -78,7 +83,8 @@ const SignIn = () => {
           />
           <button
             type="submit"
-            className="bg-gray-500 hover:bg-gray-600 text-white font-medium text-lg cursor-pointer rounded-md p-2 transition-all duration-300">
+            className="bg-gray-500 hover:bg-gray-600 text-white font-medium text-lg cursor-pointer rounded-md p-2 transition-all duration-300"
+          >
             {loading ? "Loading..." : "Sign In"}
           </button>
           <OAuth />

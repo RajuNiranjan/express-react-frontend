@@ -16,8 +16,8 @@ const OAuth = () => {
       const auth = getAuth(app);
 
       const result = await signInWithPopup(auth, provider);
-
-      const res = await axios.post("/api/auth/google", {
+      const apiURL = import.meta.env.VITE_API_URL;
+      const res = await axios.post(`${apiURL}/api/auth/google`, {
         userName: result.user.displayName,
         email: result.user.email,
         avatar: result.user.photoURL,
@@ -37,7 +37,8 @@ const OAuth = () => {
       <button
         type="button"
         onClick={handleContinueWithGoogle}
-        className="bg-red-500 hover:bg-red-600 text-white font-medium text-lg cursor-pointer rounded-md p-2 transition-all duration-500">
+        className="bg-red-500 hover:bg-red-600 text-white font-medium text-lg cursor-pointer rounded-md p-2 transition-all duration-500"
+      >
         {loading ? "Loading..." : "Continue With Google"}
       </button>
     </>

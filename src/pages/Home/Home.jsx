@@ -16,7 +16,8 @@ const Home = () => {
       setLoading(true);
       setError(false);
       try {
-        const res = await axios.get("/api/listings");
+        const apiURL = import.meta.env.VITE_API_URL;
+        const res = await axios.get(`${apiURL}/api/listings`);
         const data = res.data;
 
         setLoading(false);

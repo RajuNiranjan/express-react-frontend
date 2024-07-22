@@ -24,7 +24,8 @@ const Listings = () => {
   useEffect(() => {
     const fetchListing = async () => {
       try {
-        const res = await axios.get(`/api/listings/getListing/${id}`);
+        const apiURL = import.meta.env.VITE_API_URL;
+        const res = await axios.get(`${apiURL}/api/listings/getListing/${id}`);
         setListing(res.data);
       } catch (err) {
         setError(err);
